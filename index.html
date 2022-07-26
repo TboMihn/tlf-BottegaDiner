@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Finn's Bottega Diner</title>
+ 
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Helvetica, Ariel, sans-serif;
+            font-size: 0.85em;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9996;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .icon-holder {
+            display: none;
+        }
+        .logo, .logo a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        .logo a:hover {
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 1px 1px 2px #000000;
+        }
+        .button-holder {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 400px;
+        }
+        .myButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            width: 130px;
+        }
+        .myButton > a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: 300ms;
+        }
+        .myButton > a:hover {
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 1px 1px 2px #000000;
+        }
+        .cart, .cart a {
+            color: rgba(255, 255,255, 0.7);
+        }
+        
+
+        @media screen and (max-width: 600px) {
+            .nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 9997;
+                height: 50px;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+            .icon-holder {
+                display: flex;
+                padding-left: 15px;
+                z-index: 9999
+            }
+            .icon-holder > a > i {
+                color: rgba(255, 255, 255, 0.8);
+                transform: rotate(90deg);
+                transition: 300ms;
+            }
+            .icon-holder > a:hover i {
+                transform: rotate(5deg);
+                color: rgba(255, 255, 255, 1);
+                text-shadow: 2px 2px 4px #000000;
+            }
+            .logo {
+                color: white;
+            }
+            .button-holder {
+                display: block;
+                height: 100vh;
+                z-index: 1000;
+                width: 75vw;
+                border: 1px solid black;
+                border-radius: 4px;
+                position: fixed;
+                top: 0;
+                right: 0;
+                padding-top: 50px;
+                background-color: rgba(255, 255, 255, 0.7);
+                box-shadow: -6px 0 6px 0 rgba(0, 0, 0, 0.3);
+                transform: translatex(105%);
+                transition: transform 500ms;
+            }
+            .button-holder-away {
+                transform: translatex(0);
+            }
+            .myButton {
+                display: flex;
+                align-items: center;
+                width: 100vw;
+                height: 40px;
+                border: 1px solid rgba(0, 0, 0, 0.1)
+            }
+            .myButton a {
+                display: flex;
+                align-items: center;
+                height: 38px;
+                width: 100vw;
+                font-size: 1rem;
+                color: rgba(0, 0, 0, 0.7);
+                text-decoration: none;
+                padding-left: 30px;
+                padding-right: 70vw;
+                transition: none;
+            }
+            .myButton a:hover {
+                font-size: 1rem;
+                background-color: rgba(0, 0, 0, 0.2);
+            }
+            .myButton a:active {
+                font-size: 1rem;
+                color: rgba(255, 255, 255, 1);
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+            .cart, .cart a {
+                display: flex;
+                padding-right: 15px;
+                z-index: 9997
+            }
+            .cart > a > i {
+                color: rgba(255, 255, 255, 0.8);
+                transition: 300ms;
+            }
+            .cart > a:hover i {
+                color: rgba(255, 255, 255, 1);
+                text-shadow: 2px 2px 4px #000000;
+            }
+        }
+
+
+    </style>
+ 
+</head>
+<body>
+
+    <div class="rest-wrapper">
+
+        <div class="header" id="header">
+            
+            <div class='nav'>
+                <div class='icon-holder'>
+                    <a href="#" id='responsive-icon-holder' class='button-holder-transition'><i class="fa-solid fa-compass"></i></a>
+                </div>
+                <div class='logo'><a href="#">bottega diner</a></div>
+                <div class="button-holder" id='button-holder-one'>
+            <!--         Change the array in the JS file to make links -->
+                </div>
+                <div class='cart'><a href='#'><i class="fa-solid fa-bag-shopping"></i></a></div>
+            </div>
+
+        </div>
+
+        <div class="main-wrapper" id="mainWrapper">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/23/8f/d7/d1/medieval-tavern-u-pavouka.jpg" alt="" id="restoPic">
+        </div>
+
+        <div class="footer" id="footer">
+            This is the footer
+        </div>
+
+    </div>
+    
+</body>
+ 
+    <script>
+        // Header 
+        const mainMenus = ['breakfast', 'elevenses', 'lunch', 'dinner', 'late night'];  // put links in this array
+        const buttonHolderOne = document.getElementById("button-holder-one"); // This is the buttonHolder div.
+        const toggleBtn = document.getElementById("responsive-icon-holder");
+
+        const buttonBuilder = (btnLocation, btnArray) => {    
+            for (const btn in btnArray) {
+                const theBtn = document.createElement("div");
+                theBtn.classList.add('myButton');
+                theBtn.innerHTML = '<a href="#">' + btnArray[btn] + '</a>';
+                btnLocation.appendChild(theBtn);
+            }
+        }
+        buttonBuilder(buttonHolderOne, mainMenus);
+
+        toggleBtn.addEventListener('click', (e) => {
+            buttonHolderOne.classList.toggle('button-holder-away');
+        });
+
+
+    </script>
+ 
+</html>
